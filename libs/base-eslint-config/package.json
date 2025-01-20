@@ -1,5 +1,5 @@
 {
-  "name": "@gainometer/eslint-config",
+  "name": "@gainometer/base-eslint-config",
   "type": "module",
   "version": "1.0.0",
   "exports": {

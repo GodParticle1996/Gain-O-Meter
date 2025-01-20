@@ -21,11 +21,11 @@
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
-    "@nestjs/core": "^10.0.0",
     "rxjs": "^7.8.1",
-    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
     "reflect-metadata": "^0.2.0",
-    "@gainometer/eslint-config": "workspace:^"
+    "@nestjs/platform-express": "^10.0.0",
+    "@gainometer/base-eslint-config": "workspace:^"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

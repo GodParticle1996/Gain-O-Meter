@@ -4,6 +4,5 @@
     "module": "CommonJS",
     "strict": true
   },
-  "include": ["**/*"],
   "exclude": ["node_modules"]
 }
