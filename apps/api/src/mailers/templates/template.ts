@@ -1,8 +1,8 @@
 export const verifyEmailTemplate = (
   url: string,
-  brandColor: string = "#2563EB"
+  brandColor: string = '#2563EB',
 ) => ({
-  subject: "Confirm your Squeezy account",
+  subject: 'Confirm your Gain-O-Meter account',
   text: `Please verify your email address by clicking the following link: ${url}`,
   html: `
       <html><head><style>
@@ -17,10 +17,10 @@ export const verifyEmailTemplate = (
         .footer { font-size: 14px; color: #999999; text-align: center; padding: 20px; }
       </style></head><body>
         <div class="container">
-          <div class="header">Squeezy</div>
+          <div class="header">Gain-O-Meter</div>
           <div class="content">
             <h1>Confirm Your Email Address</h1>
-            <p>Thank you for signing up! Please confirm your account by clicking the button below.</p>
+            <p>Thank you for signing up. Please confirm your account by clicking the button below.</p>
             <a href="${url}" class="button">Confirm account</a>
             <p>If you did not create this account, please disregard this email.</p>
           </div>
@@ -30,13 +30,13 @@ export const verifyEmailTemplate = (
         </div>
       </body></html>
     `,
-});
+})
 
 export const passwordResetTemplate = (
   url: string,
-  brandColor: string = "#2563EB"
+  brandColor: string = '#2563EB',
 ) => ({
-  subject: "Reset Your Password",
+  subject: 'Reset Your Password',
   text: `To reset your password, please click the following link: ${url}`,
   html: `
       <html><head><style>
@@ -51,7 +51,7 @@ export const passwordResetTemplate = (
         .footer { font-size: 14px; color: #999999; text-align: center; padding: 20px; }
       </style></head><body>
         <div class="container">
-          <div class="header">Squeezy</div>
+          <div class="header">Gain-O-Meter</div>
           <div class="content">
             <h1>Reset Your Password</h1>
             <p>We received a request to reset your password. Click the button below to proceed with resetting your password.</p>
@@ -64,4 +64,4 @@ export const passwordResetTemplate = (
         </div>
       </body></html>
     `,
-});
+})
