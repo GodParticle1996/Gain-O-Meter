@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Loader, MailCheckIcon } from "lucide-react";
 import Logo from "@/components/logo";
-import { useMutation } from "@tanstack/react-query";
 import { registerMutationFn } from "@/lib/api";
 import { toast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { ArrowRight, Loader, MailCheckIcon } from "lucide-react";
 
 export default function SignUp() {
     const [isSubmitted, setIsSubmitted] = useState(false);

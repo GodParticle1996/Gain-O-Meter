@@ -68,7 +68,7 @@ export default function Login() {
         <Logo />
 
         <h1 className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-bold mb-1.5 mt-8 text-center sm:text-left">
-          Log in to Squeezy
+          Login to Gain-O-Meter
         </h1>
         <p className="mb-8 text-center sm:text-left text-base dark:text-[#f1f7feb5] font-normal">
           Don't have an account?{" "}
@@ -89,7 +89,7 @@ export default function Login() {
                       Email
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="subscribeto@channel.com" {...field} />
+                      <Input placeholder="subscribe@gainometer.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -122,16 +122,16 @@ export default function Login() {
               </Link>
             </div>
             <Button
-              className="w-full text-[15px] h-[40px] text-white font-semibold"
+              className="w-full text-[15px] h-[40px] text-white font-semibold hover:bg-primary-hover"
               disabled={isPending}
               type="submit"
             >
               {isPending && <Loader className="animate-spin" />}
-              Sign in
+              Login
               <ArrowRight />
             </Button>
 
-            <div className="mb-6 mt-6 flex items-center justify-center">
+            {/* <div className="mb-6 mt-6 flex items-center justify-center">
               <div
                 aria-hidden="true"
                 className="h-px w-full bg-[#eee] dark:bg-[#d6ebfd30]"
@@ -147,12 +147,12 @@ export default function Login() {
                 data-orientation="horizontal"
                 role="separator"
               ></div>
-            </div>
+            </div> */}
           </form>
         </Form>
-        <Button variant="outline" className="w-full h-[40px]">
+        {/* <Button variant="outline" className="w-full h-[40px]">
           Email magic link
-        </Button>
+        </Button> */}
         <p className="text-xs dark:text-slate- font-normal mt-7">
           By signing in, you agree to our{" "}
           <a className="text-primary hover:underline" href="#">
