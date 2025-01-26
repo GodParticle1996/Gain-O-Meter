@@ -5,7 +5,7 @@ import {
   LoginDto,
   RegisterDto,
   ResetPasswordDto,
-} from '../../common/interface/auth.interface'
+} from '@gainometer/base-ts-interfaces'
 import {
   BadRequestException,
   HttpException,
