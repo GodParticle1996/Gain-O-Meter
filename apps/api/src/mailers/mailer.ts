@@ -1,18 +1,18 @@
-import { resend } from "./resendClient";
-import { config } from "../config/app.config";
+import { resend } from './resendClient'
+import { config } from '../config/app.config'
 
 type Params = {
-  to: string | string[];
-  subject: string;
-  text: string;
-  html: string;
-  from?: string;
-};
+  to: string | string[]
+  subject: string
+  text: string
+  html: string
+  from?: string
+}
 
 const mailer_sender =
-  config.NODE_ENV === "development"
-    ? `no-reply <onboarding@resend.dev>`
-    : `no-reply <${config.MAILER_SENDER}>`;
+  config.NODE_ENV === 'development'
+    ? `no-reply <${config.MAILER_SENDER}>`
+    : `no-reply <${config.MAILER_SENDER}>`
 
 export const sendEmail = async ({
   to,
@@ -27,4 +27,4 @@ export const sendEmail = async ({
     text,
     subject,
     html,
-  });
+  })
