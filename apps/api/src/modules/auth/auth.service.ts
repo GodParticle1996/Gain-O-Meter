@@ -67,7 +67,7 @@ export class AuthService {
       expiresAt: fortyFiveMinutesFromNow(),
     })
 
-    // Sending verification email link
+    // NOTE: This url gets linked to the button in the email and on click it redirects the user to the _confirmaccount.tsx frontend page with the verification code
     const verificationUrl = `${config.APP_ORIGIN}/confirm-account?code=${verification.code}`
     await sendEmail({
       to: newUser.email,
@@ -90,8 +90,16 @@ export class AuthService {
     if (!user) {
       logger.warn(`Login failed: User with email ${email} not found`)
       throw new BadRequestException(
-        'Invalid email or password provided',
+        'User not found. Please check your email and password',
         ErrorCode.AUTH_USER_NOT_FOUND,
+      )
+    }
+
+    if (user && !user.isEmailVerified) {
+      logger.warn(`Login failed: User with email ${email} not verified`)
+      throw new BadRequestException(
+        'Email is not verified. Please verify your email',
+        ErrorCode.VALIDATION_ERROR,
       )
     }
 

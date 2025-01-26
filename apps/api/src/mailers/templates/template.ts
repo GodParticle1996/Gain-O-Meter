@@ -5,30 +5,113 @@ export const verifyEmailTemplate = (
   subject: 'Confirm your Gain-O-Meter account',
   text: `Please verify your email address by clicking the following link: ${url}`,
   html: `
-      <html><head><style>
-        body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); }
-        .header { background-color: ${brandColor}; font-weight:bold; font-size: 24px; color: #ffffff; padding: 20px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
-        .header img { max-width: 40px; margin-bottom: 10px; }
-        .content { padding: 20px; text-align: center; }
-        .content h1 { font-size: 24px; color: #333333; }
-        .content p { font-size: 16px; color: #666666; margin: 10px 0 20px; }
-        .button { display: inline-block; padding: 15px 25px; font-size: 16px; font-weight: bold;  background-color: ${brandColor}; color: #fff!important; border-radius: 5px; text-decoration: none; margin-top: 20px; }
-        .footer { font-size: 14px; color: #999999; text-align: center; padding: 20px; }
-      </style></head><body>
-        <div class="container">
-          <div class="header">Gain-O-Meter</div>
-          <div class="content">
-            <h1>Confirm Your Email Address</h1>
-            <p>Thank you for signing up. Please confirm your account by clicking the button below.</p>
-            <a href="${url}" class="button">Confirm account</a>
-            <p>If you did not create this account, please disregard this email.</p>
-          </div>
-          <div class="footer">
-            <p>If you have any questions, feel free to reply to this email or contact our support team.</p>
-          </div>
+  <html>
+  <head>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background-color: #fdf2f8;
+        color: #4a5568;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0px 4px 12px rgba(244, 114, 182, 0.1);
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        padding: 30px 20px;
+        text-align: center;
+      }
+      .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        gap: 15px;
+      }
+      .logo {
+        font-size: 28px;
+        margin: 0 auto;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .content {
+        padding: 20px 20px;
+        text-align: center;
+        background-color: #fdf2f8;
+      }
+      .content h1 {
+        font-size: 24px;
+        color: #be185d;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+      .content p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #64748b;
+        margin: 0 0 24px;
+      }
+      .button {
+        display: inline-block;
+        padding: 16px 32px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #ec4899;
+        color: #ffffff !important;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: #db2777;
+      }
+      .footer {
+        background-color: #fdf2f8;
+        font-size: 14px;
+        color: #94a3b8;
+        text-align: center;
+        padding: 0px 10px 20px 10px;
+        border-top: 1px solid #fbcfe8;
+      }
+      .footer p {
+        margin: 0;
+        line-height: 1.5;
+      }
+      .divider {
+        height: 3px;
+        background: linear-gradient(90deg, #ec4899 0%, #db2777 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <div class="logo">Gain-O-Meter</div>
         </div>
-      </body></html>
+      </div>
+      <div class="divider"></div>
+      <div class="content">
+        <h1>Confirm Your Email Address</h1>
+        <p>Thank you for signing up! Please confirm your account by clicking the button below.</p>
+        <a href="${url}" class="button">Confirm Account</a>
+      </div>
+      <div class="footer">
+        <p style="margin-top: 24px; font-size: 14px; color: #94a3b8;">If you did not create this account, please disregard this email.</p>
+        <p>If you have any questions, feel free to reply to this email<br>or contact our support team.</p>
+      </div>
+    </div>
+  </body>
+  </html>
     `,
 })
 

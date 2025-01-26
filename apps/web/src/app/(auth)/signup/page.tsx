@@ -81,12 +81,12 @@ export default function SignUp() {
                         <Logo />
 
                         <h1 className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-bold mb-1.5 mt-8 text-center sm:text-left">
-                            Create a Squeezy account
+                            Create a Gain-O-Meter account
                         </h1>
                         <p className="mb-6 text-center sm:text-left text-base dark:text-[#f1f7feb5] font-normal">
                             Already have an account?{" "}
                             <Link className="text-primary" href="/">
-                                Sign in
+                                Login
                             </Link>
                             .
                         </p>
@@ -102,7 +102,7 @@ export default function SignUp() {
                                                     Name
                                                 </FormLabel>
                                                 <FormControl>
-                                                    <Input placeholder="Techwithemma" {...field} />
+                                                    <Input placeholder="Your Name" {...field} />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
@@ -120,7 +120,7 @@ export default function SignUp() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <Input
-                                                        placeholder="subscribeto@channel.com"
+                                                        placeholder="subscribeto@gainometer.com"
                                                         autoComplete="off"
                                                         {...field}
                                                     />
@@ -174,16 +174,16 @@ export default function SignUp() {
                                     />
                                 </div>
                                 <Button
-                                    className="w-full text-[15px] h-[40px] !bg-blue-500 text-white font-semibold"
+                                    className="w-full text-[15px] h-[40px] hover:bg-primary-hover text-white font-semibold"
                                     disabled={isPending}
                                     type="submit"
                                 >
                                     {isPending && <Loader className="animate-spin" />}
-                                    Create account
+                                    Sign Up
                                     <ArrowRight />
                                 </Button>
 
-                                <div className="mb-4 mt-4 flex items-center justify-center">
+                                {/* <div className="mb-4 mt-4 flex items-center justify-center">
                                     <div
                                         aria-hidden="true"
                                         className="h-px w-full bg-[#eee] dark:bg-[#d6ebfd30]"
@@ -199,12 +199,12 @@ export default function SignUp() {
                                         data-orientation="horizontal"
                                         role="separator"
                                     ></div>
-                                </div>
+                                </div> */}
                             </form>
                         </Form>
-                        <Button variant="outline" className="w-full h-[40px]">
+                        {/* <Button variant="outline" className="w-full h-[40px]">
                             Email magic link
-                        </Button>
+                        </Button> */}
                         <p className="text-xs font-normal mt-4">
                             By signing up, you agree to our{" "}
                             <a className="text-primary hover:underline" href="#">
@@ -229,8 +229,13 @@ export default function SignUp() {
                             We just sent a verification link to {form.getValues().email}.
                         </p>
                         <Link href="/">
-                            <Button className="h-[40px]">
-                                Go to login
+                            <Button
+                                className="w-full text-[15px] h-[40px] text-white font-semibold hover:bg-primary-hover"
+                                disabled={isPending}
+                                type="submit"
+                            >
+                                {isPending && <Loader className="animate-spin" />}
+                                Login
                                 <ArrowRight />
                             </Button>
                         </Link>
