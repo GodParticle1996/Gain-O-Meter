@@ -1,9 +1,10 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowRight, MailCheckIcon, Loader, ArrowLeft } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 import {
     Form,
@@ -16,64 +17,39 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
-import { ArrowLeft, Frown, Loader } from "lucide-react";
-import Link from "next/link";
-import { resetPasswordMutationFn } from "@/lib/api";
+import { forgotPasswordMutationFn } from "@/lib/api";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import Link from "next/link";
 
-export default function ResetPassword() {
-    const router = useRouter();
-
+export default function ForgotPassword() {
     const params = useSearchParams();
-    const code = params.get("code");
-    const exp = Number(params.get("exp"));
-    const now = Date.now();
 
-    // Check if the code is valid or expired
-    const isValid = code && exp && exp > now;
+    const email = params.get("email");
+
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const { mutate, isPending } = useMutation({
-        mutationFn: resetPasswordMutationFn,
+        mutationFn: forgotPasswordMutationFn,
     });
 
-    const formSchema = z
-        .object({
-            password: z.string().trim().min(1, {
-                message: "Password is required",
-            }),
-            confirmPassword: z.string().trim().min(1, {
-                message: "Confirm password is required",
-            }),
-        })
-        .refine((data) => data.password === data.confirmPassword, {
-            message: "Password does not match",
-            path: ["confirmPassword"],
-        });
+    const formSchema = z.object({
+        email: z.string().trim().email().min(1, {
+            message: "Email is required",
+        }),
+    });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            password: "",
-            confirmPassword: "",
+            email: email || "",
         },
     });
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
-        if (!code) {
-            router.replace("/forgot-password?email=");
-            return;
-        }
-        const data = {
-            password: values.password,
-            verificationCode: code,
-        };
-        mutate(data, {
-            onSuccess: () => {
-                toast({
-                    title: "Success",
-                    description: "Password reset successfully",
-                });
-                router.replace("/");
+        mutate(values, {
+            onSuccess: (response: any) => {
+                setIsSubmitted(true);
             },
             onError: (error) => {
                 console.log(error);
@@ -88,7 +64,7 @@ export default function ResetPassword() {
 
     return (
         <main className="w-full min-h-[590px] h-full max-w-full flex items-center justify-center ">
-            {isValid ? (
+            {!isSubmitted ? (
                 <div className="w-full h-full p-5 rounded-md">
                     <Logo />
 
@@ -96,10 +72,11 @@ export default function ResetPassword() {
                         className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-bold mb-1.5 mt-8
         text-center sm:text-left"
                     >
-                        Set Up New Password
+                        Reset Password
                     </h1>
-                    <p className="mb-6 text-center sm:text-left text-[15px] dark:text-[#f1f7feb5] font-normal">
-                        Your password must be different from your previous one.
+                    <p className="mb-6 text-center sm:text-left text-base dark:text-[#f1f7feb5] font-normal">
+                        Include your registered email address and we'll
+                        send you an email with instructions to reset your password.
                     </p>
                     <Form {...form}>
                         <form
@@ -109,32 +86,16 @@ export default function ResetPassword() {
                             <div className="mb-0">
                                 <FormField
                                     control={form.control}
-                                    name="password"
+                                    name="email"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                                                New password
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Enter your password" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className="mb-0">
-                                <FormField
-                                    control={form.control}
-                                    name="confirmPassword"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="dark:text-[#f1f7feb5] text-sm">
-                                                Confirm new password
+                                                Email
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="Enter your password again"
+                                                    placeholder="subscribeto@gainometer.com"
+                                                    autoComplete="off"
                                                     {...field}
                                                 />
                                             </FormControl>
@@ -143,13 +104,12 @@ export default function ResetPassword() {
                                     )}
                                 />
                             </div>
-
                             <Button
                                 disabled={isPending}
                                 className="w-full text-[15px] h-[40px] text-white font-semibold hover:bg-primary-hover"
                             >
                                 {isPending && <Loader className="animate-spin" />}
-                                Update Password
+                                Send Reset Details
                             </Button>
                         </form>
                     </Form>
@@ -157,18 +117,23 @@ export default function ResetPassword() {
             ) : (
                 <div className="w-full h-[80vh] flex flex-col gap-2 items-center justify-center rounded-md">
                     <div className="size-[48px]">
-                        <Frown size="48px" className="animate-bounce text-red-500" />
+                        <MailCheckIcon size="48px" className="animate-bounce" />
                     </div>
                     <h2 className="text-xl tracking-[-0.16px] dark:text-[#fcfdffef] font-bold">
-                        Invalid or expired reset link
+                        Check your email
                     </h2>
                     <p className="mb-2 text-center text-sm text-muted-foreground dark:text-[#f1f7feb5] font-normal">
-                        You can request a new password reset link
+                        We just sent a password reset link to {form.getValues().email}.
                     </p>
-                    <Link href="/forgot-password?email=">
-                        <Button className="h-[40px] hover:bg-primary-hover">
+                    <Link href="/">
+                        <Button
+                            className="w-full text-[15px] h-[40px] text-white font-semibold hover:bg-primary-hover"
+                            disabled={isPending}
+                            type="submit"
+                        >
+                            {isPending && <Loader className="animate-spin" />}
                             <ArrowLeft />
-                            Forgot Password
+                            Login
                         </Button>
                     </Link>
                 </div>
