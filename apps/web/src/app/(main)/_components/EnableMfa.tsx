@@ -124,7 +124,10 @@ const EnableMfa = () => {
         ) : (
           <Dialog modal open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-              <Button disabled={isLoading} className="h-[35px] text-white">
+              <Button
+                disabled={isLoading}
+                className="h-[35px] text-white hover:bg-primary-hover"
+              >
                 Enable MFA
               </Button>
             </DialogTrigger>
@@ -135,10 +138,10 @@ const EnableMfa = () => {
                 </DialogTitle>
               </DialogHeader>
               <div className="">
-                <p className="mt-6 text-sm text-[#0007149f] dark:text-inherit font-bold">
+                <p className="mt-6 text-sm dark:text-inherit font-bold">
                   Scan the QR code
                 </p>
-                <span className="text-sm text-[#0007149f] dark:text-inherit font-normal">
+                <span className="text-sm dark:text-inherit font-normal">
                   Use an app like{' '}
                   <a
                     className="!text-primary underline decoration-primary decoration-1 underline-offset-2 transition duration-200 ease-in-out hover:decoration-blue-11 dark:text-current dark:decoration-slate-9 dark:hover:decoration-current "
@@ -180,7 +183,7 @@ const EnableMfa = () => {
                   <div className="w-full">
                     <div
                       className="flex items-center gap-1
-                              text-sm text-[#0007149f] dark:text-muted-foreground font-normal"
+                              text-sm dark:text-muted-foreground font-normal"
                     >
                       <span>Copy setup key</span>
                       <button
@@ -199,7 +202,7 @@ const EnableMfa = () => {
                     </p>
                   </div>
                 ) : (
-                  <span className="text-sm text-[#0007149f] dark:text-muted-foreground font-normal">
+                  <span className="text-sm dark:text-muted-foreground font-normal">
                     Can't scan the code?
                     <button
                       className="block text-primary transition duration-200 ease-in-out hover:underline

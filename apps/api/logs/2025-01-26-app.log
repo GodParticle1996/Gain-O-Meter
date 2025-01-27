@@ -44,3 +44,11 @@
 2025-01-26 23:34:52 [INFO]: Creating session for user ID: 67970cc51dcad46bbab425f0
 2025-01-26 23:34:52 [INFO]: Signing tokens for user ID: 67970cc51dcad46bbab425f0
 2025-01-26 23:34:52 [INFO]: Login successful for user ID: 67970cc51dcad46bbab425f0
+2025-01-26 23:54:07 [INFO]: Login attempt for email: vikiisbck@gmail.com
+2025-01-26 23:54:07 [WARN]: Login failed: User with email vikiisbck@gmail.com not found
+2025-01-26 23:55:46 [INFO]: Login attempt for email: vikiisbck@gmail.com
+2025-01-26 23:55:46 [WARN]: Login failed: Invalid password for email: vikiisbck@gmail.com
+2025-01-26 23:55:49 [INFO]: Login attempt for email: vikiisbck@gmail.com
+2025-01-26 23:55:49 [INFO]: Creating session for user ID: 6797118d96969ec69381139d
+2025-01-26 23:55:50 [INFO]: Signing tokens for user ID: 6797118d96969ec69381139d
+2025-01-26 23:55:50 [INFO]: Login successful for user ID: 6797118d96969ec69381139d
