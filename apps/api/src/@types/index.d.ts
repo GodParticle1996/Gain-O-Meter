@@ -1,17 +1,19 @@
-import { UserDocument } from "../database/models/user.model";
-import { Request } from "express";
+import { UserDocument } from '../database/models/user.model'
+import { Request } from 'express'
 
 declare global {
   namespace Express {
     interface User extends UserDocument {}
     interface Request {
-      sessionId?: string;
+      sessionId?: string
     }
   }
 }
 
 /*
-NOTE:The above code is a TypeScript declaration file that extends the Express namespace to include two new interfaces:
+NOTE:The above code is a TypeScript declaration file that extends the Express namespace to include two new interfaces
+NOTE: Make sure to add this file to your tsconfig.json file under the compilerOptions: includes array section with @types/index.d.ts
+
 1. Using declare global to modify TypeScript's global scope
 2. Extending the existing Express namespace
 3. Adding two interface declarations:

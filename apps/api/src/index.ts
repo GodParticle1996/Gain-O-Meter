@@ -8,6 +8,8 @@ import authRoutes from './modules/auth/auth.routes'
 import { asyncHandler } from './middlewares/asyncHandler'
 import { errorHandler } from './middlewares/errorHandler'
 import express, { NextFunction, Request, Response } from 'express'
+import sessionRoutes from './modules/session/session.routes'
+import passport from './middlewares/passport'
 
 const app = express()
 const BASE_PATH = config.BASE_PATH
@@ -22,6 +24,7 @@ app.use(
 )
 
 app.use(cookieParser())
+app.use(passport.initialize())
 
 app.get(
   '/',
@@ -33,6 +36,8 @@ app.get(
 )
 
 app.use(`${BASE_PATH}/auth`, authRoutes)
+
+app.use(`${BASE_PATH}/session`, sessionRoutes)
 
 app.use(errorHandler)
 

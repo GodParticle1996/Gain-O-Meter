@@ -7,40 +7,40 @@ import { Loader } from 'lucide-react'
 import { toast } from '@/hooks/use-toast'
 
 const Sessions = () => {
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['sessions'],
-    queryFn: sessionsQueryFn,
-    staleTime: Infinity,
-  })
+  // const { data, isLoading, refetch } = useQuery({
+  //   queryKey: ['sessions'],
+  //   queryFn: sessionsQueryFn,
+  //   staleTime: Infinity,
+  // })
 
   const { mutate, isPending } = useMutation({
     mutationFn: sessionDelMutationFn,
   })
 
-  const sessions = data?.sessions || []
+  // const sessions = data?.sessions || []
 
-  const currentSession = sessions?.find((session) => session.isCurrent)
-  const otherSessions = sessions?.filter(
-    (session) => session.isCurrent !== true,
-  )
+  // const currentSession = sessions?.find((session) => session.isCurrent)
+  // const otherSessions = sessions?.filter(
+  //   (session) => session.isCurrent !== true,
+  // )
 
   const handleDelete = useCallback((id: string) => {
-    mutate(id, {
-      onSuccess: () => {
-        refetch()
-        toast({
-          title: 'Success',
-          description: 'Session removed successfully',
-        })
-      },
-      onError: (error) => {
-        toast({
-          title: 'Error',
-          description: error.message,
-          variant: 'destructive',
-        })
-      },
-    })
+    // mutate(id, {
+    //   onSuccess: () => {
+    //     refetch()
+    //     toast({
+    //       title: 'Success',
+    //       description: 'Session removed successfully',
+    //     })
+    //   },
+    //   onError: (error) => {
+    //     toast({
+    //       title: 'Error',
+    //       description: error.message,
+    //       variant: 'destructive',
+    //     })
+    //   },
+    // })
   }, [])
 
   return (
@@ -54,7 +54,7 @@ const Sessions = () => {
           These are the sessions where your account is currently logged in. You
           can log out of each session.
         </p>
-        {isLoading ? (
+        {/* {isLoading ? (
           <Loader size="35px" className="animate-spin" />
         ) : (
           <div className="rounded-t-xl max-w-xl">
@@ -87,12 +87,13 @@ const Sessions = () => {
                 overflow-y-auto
                 "
                 >
-                  {otherSessions?.map((session) => (
+                  {otherSessions?.map((session, index) => (
                     <li>
                       <SessionItem
                         loading={isPending}
                         userAgent={session.userAgent}
                         date={session.createdAt}
+                        key={index}
                         expiresAt={session.expiresAt}
                         onRemove={() => handleDelete(session._id)}
                       />
@@ -102,7 +103,7 @@ const Sessions = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   )

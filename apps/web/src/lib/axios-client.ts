@@ -21,7 +21,6 @@ API.interceptors.response.use(
   async (error) => {
     // Destructure the error response to get data and status
     const { data, status } = error.response
-    console.log(data, 'data')
 
     // Check if error is due to missing auth token and status is unauthorized (401)
     if (data.errorCode === 'AUTH_TOKEN_NOT_FOUND' && status === 401) {

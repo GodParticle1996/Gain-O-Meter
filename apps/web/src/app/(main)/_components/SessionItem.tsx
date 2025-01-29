@@ -7,11 +7,12 @@ const SessionItem = (props: {
   loading?: boolean
   userAgent: string
   date: string
+  key?: number
   expiresAt: string
   isCurrent?: boolean
   onRemove?: () => void
 }) => {
-  const { userAgent, loading, date, isCurrent = false, onRemove } = props
+  const { userAgent, loading, date, isCurrent = false, onRemove, key } = props
 
   const { os, browser, timeAgo, icon: Icon } = parseUserAgent(userAgent, date)
 
@@ -21,7 +22,7 @@ const SessionItem = (props: {
     }
   }
   return (
-    <div className="w-full flex items-center ">
+    <div className="w-full flex items-center " key={key}>
       <div
         className="shrink-0 mr-[16px] flex items-center justify-center
        w-[48px] h-[48px] rounded-full border dorder-[#eee] dark:border-[rgb(42,45,48)]"
