@@ -21,7 +21,9 @@ const Home = () => {
             <div className="bg-white dark:bg-background  absolute -left-[9.5px] top-7 z-10 block h-5 w-5 rounded-full">
               <div className="ml-1 mt-1 h-3 w-3 rounded-full border-2 transition duration-200 ease-in-out border-primary"></div>
             </div>
-            <div>{/* <EnableMfa /> */}</div>
+            <div>
+              <EnableMfa />
+            </div>
           </div>
         </div>
 
@@ -30,7 +32,9 @@ const Home = () => {
             <div className="bg-white dark:bg-background  absolute -left-[9.5px] top-7 z-10 block h-5 w-5 rounded-full">
               <div className="ml-1 mt-1 h-3 w-3 rounded-full border-2 transition duration-200 ease-in-out border-primary"></div>
             </div>
-            <div>{/* <Sessions /> */}</div>
+            <div>
+              <Sessions />
+            </div>
           </div>
         </div>
       </div>

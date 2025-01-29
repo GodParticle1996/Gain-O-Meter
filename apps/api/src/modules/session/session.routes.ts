@@ -4,8 +4,8 @@ import { authenticateJWT } from '../../common/strategies/jwt.strategy'
 
 const sessionRoutes = Router()
 
-sessionRoutes.get('/all', authenticateJWT, sessionController.getAllSession)
-sessionRoutes.get('/', authenticateJWT, sessionController.getSession)
-sessionRoutes.delete('/:id', authenticateJWT, sessionController.deleteSession)
+sessionRoutes.get('/all', sessionController.getAllSession)
+sessionRoutes.get('/', sessionController.getSession)
+sessionRoutes.delete('/:id', sessionController.deleteSession)
 
 export default sessionRoutes
