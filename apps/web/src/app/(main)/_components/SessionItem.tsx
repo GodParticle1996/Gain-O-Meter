@@ -7,7 +7,7 @@ const SessionItem = (props: {
   loading?: boolean
   userAgent: string
   date: string
-  key?: number
+  key?: string
   expiresAt: string
   isCurrent?: boolean
   onRemove?: () => void

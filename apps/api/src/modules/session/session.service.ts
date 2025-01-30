@@ -1,5 +1,5 @@
-import { NotFoundException } from "../../common/utils/catch-errors";
-import SessionModel from "../../database/models/session.model";
+import { NotFoundException } from '../../common/utils/catch-errors'
+import SessionModel from '../../database/models/session.model'
 
 export class SessionService {
   /*
@@ -33,37 +33,38 @@ The results are sorted by createdAt in descending order (-1), which means the ne
         sort: {
           createdAt: -1,
         },
-      }
-    );
+      },
+    )
 
     return {
       sessions,
-    };
+    }
   }
 
   public async getSessionById(sessionId: string) {
     const session = await SessionModel.findById(sessionId)
-      .populate("userId")
-      .select("-expiresAt");
+      .populate('userId')
+      .select('-expiresAt')
+    // The select("-expiresAt") is used to exclude the expiresAt field from the result.
 
     if (!session) {
-      throw new NotFoundException("Session not found");
+      throw new NotFoundException('Session not found')
     }
-    const { userId: user } = session;
+    const { userId: user } = session
 
     return {
       user,
-    };
+    }
   }
 
   public async deleteSession(sessionId: string, userId: string) {
     const deletedSession = await SessionModel.findByIdAndDelete({
       _id: sessionId,
       userId: userId,
-    });
+    })
     if (!deletedSession) {
-      throw new NotFoundException("Session not found");
+      throw new NotFoundException('Session not found')
     }
-    return;
+    return
   }
 }

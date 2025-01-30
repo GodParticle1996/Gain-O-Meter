@@ -274,7 +274,10 @@ const EnableMfa = () => {
                         </FormItem>
                       )}
                     />
-                    <Button disabled={isPending} className="w-full h-[40px]">
+                    <Button
+                      disabled={isPending}
+                      className="w-full h-[40px] hover:bg-primary-hover"
+                    >
                       {isPending && <Loader className="animate-spin" />}
                       Verify
                     </Button>
