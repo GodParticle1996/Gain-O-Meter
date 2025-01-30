@@ -166,6 +166,7 @@ export class AuthService {
   refresh token options. If no refresh is needed, newRefreshToken remains undefined.
   */
   public async refreshToken(refreshToken: string) {
+    // Verify the refresh token
     const { payload } = verifyJwtToken<RefreshTPayload>(refreshToken, {
       secret: refreshTokenSignOptions.secret,
     })
@@ -174,6 +175,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token')
     }
 
+    // Find the session associated with the refresh token
     const session = await SessionModel.findById(payload.sessionId)
     const now = Date.now()
 
@@ -185,14 +187,17 @@ export class AuthService {
       throw new UnauthorizedException('Session expired')
     }
 
+    // Check if the session requires renewal (e.g., nearing expiration)
     const sessionRequireRefresh =
       session.expiredAt.getTime() - now <= ONE_DAY_IN_MS
 
     if (sessionRequireRefresh) {
+      // Extend the session expiration date
       session.expiredAt = calculateExpirationDate(config.JWT.REFRESH_EXPIRES_IN)
       await session.save()
     }
 
+    // Issue a new refresh token
     const newRefreshToken = sessionRequireRefresh
       ? signJwtToken(
           {

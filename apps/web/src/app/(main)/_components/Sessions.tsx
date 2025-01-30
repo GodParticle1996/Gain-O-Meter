@@ -88,12 +88,12 @@ const Sessions = () => {
                 "
                 >
                   {otherSessions?.map((session, index) => (
-                    <li>
+                    <li key={index}>
                       <SessionItem
                         loading={isPending}
                         userAgent={session.userAgent}
                         date={session.createdAt}
-                        key={index}
+                        key={session._id}
                         expiresAt={session.expiresAt}
                         onRemove={() => handleDelete(session._id)}
                       />
