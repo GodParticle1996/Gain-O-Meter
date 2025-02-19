@@ -1,22 +1,28 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express'
 
 type AsynControllerType = (
   req: Request,
   res: Response,
-  next: NextFunction
-) => Promise<any>;
+  next: NextFunction,
+) => Promise<any>
 
 export const asyncHandler =
   (controller: AsynControllerType): AsynControllerType =>
   async (req, res, next) => {
     try {
-      await controller(req, res, next);
+      await controller(req, res, next)
     } catch (error) {
-      next(error);
+      next(error)
     }
-  };
+  }
 
-/*** The above code is a TypeScript function that takes in a controller function as an argument and returns a new function that wraps the original controller function. 
+/* 
+NOTE: The above function take in the route controller function as an argument and calls it and if there is an error it passes it to the next middleware function in the 
+Express.js middleware chain. If you check the index.ts file you will see that the nextt function is the errorHandler function.
+*/
+
+/*
+The above code is a TypeScript function that takes in a controller function as an argument and returns a new function that wraps the original controller function. 
 The new function catches any errors that occur during the execution of the original controller function and passes them to the next middleware function in the Express.js 
 middleware chain. The below is the code in more readable format: 
 
@@ -49,4 +55,4 @@ export function asyncHandler(
   // Return the wrapper function to be used as middleware
   return middlewareWrapper;
 }
-***/
+*/
