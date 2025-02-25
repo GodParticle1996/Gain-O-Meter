@@ -2,7 +2,15 @@
   "name": "gainometer",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "build-all": "pnpm run --parallel -r build",
+    "run-all": "pnpm run --parallel -r run:dev",
+    "nx-build-all": "nx run-many --target=build",
+    "lint": "node node_modules/prettier/bin/prettier --check \"**/*.{js,json,ts,yml,yaml}\"",
+    "prepare": "husky install",
+    "prettier": "node node_modules/prettier/bin/prettier --check '**/*.{js,json,ts,yml,yaml}'",
+    "prettier:write": "node node_modules/prettier/bin/prettier --write \"**/*.{js,json,ts,yml,yaml}\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
