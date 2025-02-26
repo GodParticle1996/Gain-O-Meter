@@ -17,12 +17,11 @@ API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const { data, status, config } = error.response
-
     /* 
-    When the initial API request fails with a 401 status and 'AUTH_TOKEN_NOT_FOUND' error code response, the interceptor sets the config._retry flag 
+    // NOTE: This segment of code handles the case when there is an error with the authentication token
     to true (line 33). This flag is used to prevent infinite loops when retrying the request. It then tries to refresh the token using the refresh 
     token in the cookie. If the refresh token is valid, the request is retried with the new token (line 35). If the refresh token is invalid, the 
-    request is rejected.
+    request is rejected. Check below for the entire flow of the code
     */
     if (config._retry) {
       return Promise.reject(data) // Stop retrying
@@ -76,4 +75,20 @@ Navigation Reloads the App:
 Why the Loop?:
   The loop wasn’t from react-query retries (since retry: 0), but from the app reload/navigation cycle caused by window.location.href.
   Each navigation restarted the app, re-mounted useAuth, and triggered a new API call, bypassing the config._retry check because it’s a fresh request.
+*/
+
+/* 
+// NOTE: Why config._retry is set to true
+1. When the initial API request fails (useAuth() to fetch the session/user details) with a 401 status and 'AUTH_TOKEN_NOT_FOUND' error code, 
+the interceptor catches the error.
+2. Before attempting to refresh the token, the code checks if config._retry is already set to true.
+3. If config._retry is not true, the code sets it to true and proceeds with the refresh token request to fetch a new access token.
+4. If the refresh token request succeeds, the original request is retried with the new access token. If the refresh token is invalid, the 
+request is rejected which bubbles back to the useAuth (react-query) hook.
+5. Now lets say I successsfully refresh the token, the interceptor will retry the original request with the new access token. If now retrying of the
+failed request is successful then we return back the response (line 17) but if it fails again, it's caught by the axios response interceptor again 
+line (18). Now, config._retry is true, it means the request has already tried to refresh the token, so the code returns the rejection immediately 
+(return Promise.reject(data)). This prevents another attempt at refreshing the token.
+
+
 */
