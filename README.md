@@ -392,7 +392,7 @@ Below is a deeper, low‑level architectural teardown focused on *why* the syste
 
 ---
 
-# 0) Architecture Overview (Why it’s structured this way)
+# 1) Architecture Overview (Why it’s structured this way)
 **Intent:**  
 This system blends *stateless* access tokens (JWT) with a *stateful* session record to get the best of both worlds:
 
@@ -404,7 +404,7 @@ This is a common hybrid design: JWT for speed, session DB for control.
 
 ---
 
-# 1) Token Entropy (How unpredictable are tokens?)
+# 2) Token Entropy (How unpredictable are tokens?)
 **Files:**  
 - `apps/api/src/common/utils/jwt.ts`
 
@@ -428,7 +428,7 @@ If `JWT_SECRET` is weak or reused across environments, tokens are forgeable.
 
 ---
 
-# 2) Token TTL / Expiration Strategy (Why these numbers?)
+# 3) Token TTL / Expiration Strategy (Why these numbers?)
 **Files:**  
 - `apps/api/src/config/app.config.ts`  
 - `apps/api/src/common/utils/date-time.ts`  
@@ -464,7 +464,7 @@ Refresh token rotation is *not enforced every time*. This makes replay attacks p
 
 ---
 
-# 3) Signature Verification & Claims Validation
+# 4) Signature Verification & Claims Validation
 **Files:**  
 - `apps/api/src/common/utils/jwt.ts`  
 - `apps/api/src/common/strategies/jwt.strategy.ts`
@@ -491,7 +491,7 @@ This is acceptable for a single‑tenant app, but becomes risky with multi‑aud
 
 ---
 
-# 4) How Identity is Hydrated & Propagated (API “Gateway” Flow)
+# 5) How Identity is Hydrated & Propagated (API “Gateway” Flow)
 
 There is **no separate API Gateway**. The Express app itself is the gatekeeper.
 
@@ -523,7 +523,7 @@ This weakens server‑side revocation.
 
 ---
 
-# 5) MFA Architecture (Low‑Level Why)
+# 6) MFA Architecture (Low‑Level Why)
 **Files:**  
 - `apps/api/src/modules/mfa/mfa.service.ts`  
 - `apps/api/src/modules/auth/auth.service.ts`
@@ -550,7 +550,7 @@ This breaks the “second factor” model.
 
 ---
 
-# 6) Frontend Interceptor — Race Conditions & Double Refresh
+# 7) Frontend Interceptor — Race Conditions & Double Refresh
 **Files:**  
 - `apps/next-web/src/lib/axios-client.ts`  
 - `apps/react-web/src/lib/axios-client.ts`
@@ -581,7 +581,7 @@ There is **no mechanism** like:
 
 ---
 
-# 7) Token Leakage Risk (Storage & Transport)
+# 8) Token Leakage Risk (Storage & Transport)
 **Good Practices Present**
 - Tokens stored in **HttpOnly cookies**
 - `sameSite` + `secure` configured
@@ -599,7 +599,7 @@ There is **no mechanism** like:
 
 ---
 
-# 8) Refresh Token Rotation / Revocation / Blacklist
+# 9) Refresh Token Rotation / Revocation / Blacklist
 **Files:**  
 - `apps/api/src/modules/auth/auth.service.ts`
 
@@ -620,7 +620,7 @@ The system **cannot instantly revoke access tokens** after logout or compromise.
 
 ---
 
-# 9) Claims Handling for User Lookup
+# 10) Claims Handling for User Lookup
 There is no `sub` claim. Instead:
 ```ts
 payload.userId  // custom field
@@ -639,7 +639,7 @@ No interoperability with external identity providers, and no clean migration to 
 
 ---
 
-# 10) Additional Notable Architectural Gaps
+# 11) Additional Notable Architectural Gaps
 
 ### MFA verification trusts client secret
 **File:** `mfa.service.ts`
@@ -668,7 +668,7 @@ Session model has no TTL index → expired sessions remain in DB.
 
 ---
 
-# 11) Summary of Architectural “Why” + Consequences
+# 12) Summary of Architectural “Why” + Consequences
 
 | Design Choice | Why It Exists | Consequence |
 |---|---|---|
@@ -681,7 +681,7 @@ Session model has no TTL index → expired sessions remain in DB.
 
 ---
 
-# 12) What’s Missing (for strong security posture)
+# 13) What’s Missing (for strong security posture)
 
 **1) MFA step should be bound to password login**
 - Temporary MFA token or pending login session
@@ -703,7 +703,7 @@ Session model has no TTL index → expired sessions remain in DB.
 
 ---
 
-Below are **detailed, low‑level code snippets** for **every topic** we discussed, with **explicit comments** explaining the “why,” trade‑offs, and how it addresses each architectural gap. These are **illustrative patches** you can apply to the repo (file references included).
+Below are **detailed, low‑level code snippets** for **every topic** we discussed, with **explicit comments** explaining the “why,” trade‑offs, and how it addresses each architectural gap.
 
 ---
 
