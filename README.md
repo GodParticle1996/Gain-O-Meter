@@ -1,4 +1,4 @@
-Below is a detailed technical audit of the authentication + MFA implementation in this repository. I’ve referenced the exact files and called out security/code‑quality issues with corrected examples and the underlying principles.
+Below is a detailed technical audit of the authentication + MFA implementation in this repository.
 
 ---
 
