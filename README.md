@@ -93,8 +93,3 @@ Vite prints the exact local URL in the terminal (commonly `http://localhost:5173
 ```bash
 pnpm build-all
 ```
-
-## Additional docs
-
-- AAA protocol assessment: `AAA_PROTOCOLS_ASSESSMENT.md`
-- OIDC/SAML/OAuth implementation plan: `IDENTITY_PROTOCOLS_IMPLEMENTATION_GUIDE.md`
