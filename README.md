@@ -388,7 +388,7 @@ if (session.expiredAt <= now) throw UnauthorizedException("Session expired");
 ```
 
 ---
-Below is a deeper, low‑level architectural teardown focused on *why* the system is built this way, how it behaves under stress, and where the design assumptions create gaps. I’ll reference concrete files and then explain the architectural rationale and consequences.
+Below is a deeper, low‑level architectural teardown focused on *why* the system is built this way, how it behaves under stress, and where the design assumptions create gaps. 
 
 ---
 
