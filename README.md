@@ -94,11 +94,6 @@ Vite prints the exact local URL in the terminal (commonly `http://localhost:5173
 pnpm build-all
 ```
 
-## 5) Notes
-
-- The root `run-all` script currently expects `run:dev` scripts in workspaces, but the apps expose `dev` scripts. Run each app with `pnpm --filter ... dev` as shown above.
-- If email features are not needed locally, keep valid placeholder values for `MAILER_SENDER` and `RESEND_API_KEY` or adjust code paths accordingly.
-
 ## Additional docs
 
 - AAA protocol assessment: `AAA_PROTOCOLS_ASSESSMENT.md`
